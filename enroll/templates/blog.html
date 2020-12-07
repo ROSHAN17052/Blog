@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Blog_page</h2>
+    <hr>
+    
+    {% for i in page_obj %}
+    <h6>{{i.id}}</h6>
+ <h2>{{i.title}}</h2> 
+ <p>{{i.desc|truncatewords:40}}</p> <a href="{% url 'postdetail' i.id%}">Read More</a>
+ <small>{{i.pub_date}}</small>  
+    {% endfor %}   
+   <hr>
+<div>
+    <span>
+      <h3>Next and previous Page......</h3><br>
+    {% if page_obj.has_previous %}
+    <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+  <!--<span>{{page_obj.number}}</span>-->  
+    <span>Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+    </span>
+</div>
+</body>
+</html>
